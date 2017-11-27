@@ -75,11 +75,10 @@ require_once 'HTML/Template/Sigma.php';
 include_once INCLUDE_DIR . '/controle.php';
 
 include_once LIBRARY_DIR . '/PHPMailer/class.phpmailer.php';
-include_once LIBRARY_DIR . '/Requests.php';
 
 $options = &PEAR::getStaticProperty('DB_DataObject', 'options');
-$config = parse_ini_file('D:/ICMC/Projetos/Compras/conf/compras.ini', TRUE);
-$options = $config['DB_DataObject'];
+//$config = parse_ini_file('D:/ICMC/Projetos/Compras/conf/dbCompras.ini', TRUE);
+//$options = $config['DB_DataObject'];
 
 
 define('LANG', "pt-br");
