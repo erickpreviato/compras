@@ -35,14 +35,13 @@ com este programa, Se não, veja <http://www.gnu.org/licenses/>.
  * @copyright Seção Técnica de Informática - STI/ICMC
  */
 include_once '../../conf/config.default.php';
-logado();
-include_once MODEL_DIR . '/Pais.php';
-include_once MODEL_DIR . '/Estado.php';
-
-include_once CONTROLLER_DIR . '/pais.php';
+//logado();
+//include_once MODEL_DIR . '/Pais.php';
+//include_once MODEL_DIR . '/Estado.php';
+//
+//include_once CONTROLLER_DIR . '/pais.php';
 
 include_once INCLUDE_DIR . '/header.php';
-include_once INCLUDE_DIR . '/menu.php';
 
 if (verificaPermissao('Administrador') || verificaPermissao('Secretaria')) {
     
