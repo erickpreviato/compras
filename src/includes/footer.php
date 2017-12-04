@@ -32,7 +32,7 @@ com este programa, Se não, veja <http://www.gnu.org/licenses/>.
 <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-        Seção Técnica de Informática
+        Pirulito Systems
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2017 <a href="http://www.icmc.usp.br" target="_blank">ICMC</a>.</strong> Todos os direitos reservados.

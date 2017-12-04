@@ -44,7 +44,6 @@ include_once INCLUDE_DIR . '/header.php';
 
 
 $modelo = new Modelo();
-$modelo->find();
 echo $modelo->showList();
 
 
