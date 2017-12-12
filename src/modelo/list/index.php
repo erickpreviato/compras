@@ -1,9 +1,8 @@
 <?php
-
 /*
-  Copyright © 2017 Seção Técnica de Informática - STI / ICMC <sti@icmc.usp.br>
+  Copyright © 2017 E2 Sistemas - E2 / Compras <compras@e2.usp.br>
 
-  Este arquivo é parte do programa "Vagas"
+  Este arquivo é parte do programa "Compras"
 
   Vagas é um software livre; você pode redistribuí-lo e/ou
   modificá-lo dentro dos termos da Licença Pública Geral GNU como
@@ -33,18 +32,23 @@
  * </ul> 
  * </p> 
  *  
- * @author Carlos Eduardo Favaro <cadufavaro@gmail.com>
- * @copyright Seção Técnica de Informática - STI/ICMC
+ * @author Carlos Eduardo Favaro <cadufavaro@gmail.usp.br>
+ * @copyright E2 Sistemas - E2/Compras
  */
 include_once '../../conf/config.default.php';
+logado();
 
 include_once MODEL_DIR . '/Modelo.php';
 
-include_once INCLUDE_DIR . '/header.php';
+include_once CONTROLLER_DIR . '/modelo.php';
 
+include_once INCLUDE_DIR . '/header.php';
 
 $modelo = new Modelo();
 echo $modelo->showList();
 
-
 include_once INCLUDE_DIR . '/footer.php';
+?>
+
+
+

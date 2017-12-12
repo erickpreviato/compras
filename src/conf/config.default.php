@@ -2,7 +2,7 @@
 /*
 Copyright © 2017 Seção Técnica de Informática - STI / ICMC <sti@icmc.usp.br>
 
-Este arquivo é parte do programa "Vagas"
+Este arquivo é parte do programa "Compras"
 
 Vagas é um software livre; você pode redistribuí-lo e/ou 
 modificá-lo dentro dos termos da Licença Pública Geral GNU como 
@@ -77,8 +77,8 @@ include_once INCLUDE_DIR . '/controle.php';
 include_once LIBRARY_DIR . '/PHPMailer/class.phpmailer.php';
 
 $options = &PEAR::getStaticProperty('DB_DataObject', 'options');
-//$config = parse_ini_file('D:/ICMC/Projetos/Compras/conf/dbCompras.ini', TRUE);
-//$options = $config['DB_DataObject'];
+$config = parse_ini_file('D:/ICMC/Projetos/compras/conf/dbCompras.ini', TRUE);
+$options = $config['DB_DataObject'];
 
 
 define('LANG', "pt-br");

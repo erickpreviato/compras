@@ -18,76 +18,61 @@ com este programa, Se não, veja <http://www.gnu.org/licenses/>.
 -->
 
 <script>
-    $(document).ready(function() {
 
-        $(".view").on('click', function() {
-                $("#addModal").html('<center><img src="{URL}/view/img/carregando.gif" /></center>');
-                $("#addModal").modal("show");
-                $.post("{PHP_SELF}", {showDetails: $(this).val()}).done(function(data) {
-                    $("#addModal").html(data);
-                });
-        });
-        
-        $(".del").on('click', function(){
-                $("#addModal .modal-title").html("{TITULO}");
-                $("#addModal .modal-body").html('<label class="text-danger">Registro não pode ser removido. Contate o administrador</label>');
-                $("#addModal #salvar").addClass('hide');
-                $("#addModal").modal("show");          
-        });
 
-        $(".edit").on('click', function() {
-                $("#addModal").html('<center><img src="{URL}/view/img/carregando.gif" /></center>');
-                $("#addModal").modal("show");
-                $.post("{PHP_SELF}", {edit: $(this).val()}).done(function(data) {
-                    $("#addModal").html(data);
-                });
-        });
-        
-        $(".new").on('click', function() {
-                $("#addModal").html('<center><img src="{URL}/view/img/carregando.gif" /></center>');
-                $("#addModal").modal("show");
-                $.post("{PHP_SELF}", {new: $(this).val()}).done(function(data) {
-                    $("#addModal").html(data);
-                });
-        });
-        
-        $(".btn-conflito").on('click', function() {
-            $("#addModal").html('<center><img src="{URL}/view/img/carregando.gif" /></center>');
+    //necessÃ¡rio porque os botÃµes sÃ£o criados sob demanda durante o carregamento ajax.
+    function rebindEvents() {
+        //console.log('Rebinding...');
+
+        $(".new").on('click', function () {
+            $("#addModal .modal-body").html('<center><img src="{URL}/view/img/Carregando.gif" /></center>');
             $("#addModal").modal("show");
-            $.post("{PHP_SELF}", {showConflito: $(this).val()}).done(function(data) {
+            $.post("{PHP_SELF}", {new: $(this).val()}).done(function (data) {
                 $("#addModal").html(data);
             });
         });
+    }
 
+    $(document).ready(function () {
 
         $(".table tr td button").tooltip();
 
-        <!-- BEGIN datatable --> 
         $('.table').dataTable({
             "columns": [
-            null,
-            null,
-            null,
-            null,
-            { "bSortable": false }
+                {"bSortable": false},
+                null,
+                null
+                //{ "bSortable": false, "className": "text-center"  },
+                //{ "className": "text-center"  },
+                //{ "bSortable": false, "className": "text-center" }
             ],
+            "order": [[1, "asc"]], //definindo a coluna 2 = candidato como ordem inicial
             "oLanguage": {
-            "sUrl": "{URL}/view/language/pt_BR.txt"
+                "sUrl": "{URL}/view/language/pt_BR.txt"
             },
-            "bStateSave": true,
-            "iCookieDuration": 3600,
+
             "bSortClasses": true,
-            "sPaginationType": "full_numbers"
+            "processing": true,
+            "serverSide": true,
+            "bDestroy": true,
+            "ajax": "{URL}/modelo/list/list.php",
+            //dom: "<'row'<'col-sm-3'l><'col-sm-3'f><'col-sm-6'p>>" +
+            //        "<'row'<'col-sm-12'tr>>" +
+            //        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            "fnDrawCallback": function (oSettings) {
+                //console.log( 'Reloging bind events!' );
+                rebindEvents();//necessÃ¡rio pois os botÃµes sÃ£o criados dinimicamente pelo ajax.
+            }
         });
+
         $('.dataTables_paginate').addClass("pagination");
-        <!-- END datatable -->   
     });
 </script>
 
 <section class="content-header">
     <h1>
         {TITULO}
-        <small>Sistema de vagas ICMC.</small>
+        <small>{SISTEMA}</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="{HOME}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -111,13 +96,7 @@ com este programa, Se não, veja <http://www.gnu.org/licenses/>.
                                     C&oacute;digo
                                 </th>
                                 <th class=" text-center">
-                                    Sigla
-                                </th>
-                                <th class=" text-center">
-                                    Pa&iacute;s
-                                </th>
-                                <th class=" text-center">
-                                    Status
+                                    Modelo
                                 </th>
                                 <th class=" text-center">
                                     A&ccedil;&otilde;es
@@ -125,20 +104,17 @@ com este programa, Se não, veja <http://www.gnu.org/licenses/>.
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- BEGIN table_row --> 
+ 
                             <tr>
                                 <td>{CODIGO}</td>
-                                <td>{SIGLA}</td>
-                                <td>{PAIS}</td>
-                                <td class="text-center">{STATUS}</td>
+                                <td>{MODELO}</td>
                                 <td class="text-center">
-                                    <!-- BEGIN btn-conflito --><button type="button" class="btn-conflito btn btn-xs btn-box-tool" value="{ID}" name="conflito" data-toggle="tooltip" title="Conflito"><i class="fa fa-warning text-yellow"></i></button> <!-- END btn-conflito -->
-                                    <!-- BEGIN btn-edit --><button type="button" class="edit btn btn-xs btn-box-tool" value="{ID}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button> <!-- END btn-edit -->
+                                    <button type="button" class="btn-conflito btn btn-xs btn-box-tool" value="{ID}" name="conflito" data-toggle="tooltip" title="Conflito"><i class="fa fa-warning text-yellow"></i></button>
+                                    <button type="button" class="edit btn btn-xs btn-box-tool" value="{ID}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>
                                     <button type="button" class="view btn btn-xs btn-box-tool" value="{ID}" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye"></i></button>
                                     <button type="button" class="del btn btn-xs btn-box-tool" value="{ID}" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash-o"></i></button>
                                 </td>
                             </tr>
-                            <!-- END table_row -->
                             <!-- BEGIN row_none --> 
                             <tr>
                                 <td colspan="5">{NONE}</td>
