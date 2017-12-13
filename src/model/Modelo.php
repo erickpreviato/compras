@@ -60,7 +60,9 @@ class Modelo extends DB_DataObject {
 
             $c[] = $this->getidmodelo();
             $c[] = $this->getmodelo();
-            $c[] = '';
+            $c[] = '<button type="button" class="edit btn btn-xs btn-box-tool" value="'.$this->getidmodelo().'" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="view btn btn-xs btn-box-tool" value="'.$this->getidmodelo().'" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye"></i></button>
+                    <button type="button" class="del btn btn-xs btn-box-tool" value="'.$this->getidmodelo().'" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash-o"></i></button>';
 
             $ret['data'][] = $c;
         }
